@@ -5,7 +5,7 @@ for(row in 1:73643){
 
 #Récupérer tous les noms de ville ou la long et lat == 0
 data <- data[data$latitude == 0 & data$longitude == 0, ]
-nom_villes <- filtered_data$ville
+nom_villes <- data$ville
 #print(unique(nom_villes))
 
 #remplacer les long et lat 0;0 
