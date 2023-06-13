@@ -2,9 +2,16 @@ if(!require('chron')) {
   install.packages('chron')
 }
 
-library('chron')
+if(!require('chron')) {
+  install.packages('readr')
+}
 
-data = stat_acc_V3
+library('chron')
+library('readr')
+
+
+data <- read.csv("stat_acc_V3.csv", sep=";")
+
 
 #Mettre la date sous format date
 data <- transform(data, date = as.chron(date)) 
@@ -56,6 +63,9 @@ data$descr_grav<- gsub("Blessé léger", 4, data$descr_grav)
 for(row in 1:73643){
   if (data[row,"place"] == "NULL") {data[row,"place"] =10}
 }
+
+#Supprime tous les DOM
+data <- data[!grepl("^97", data$id_code_insee), ]
 
 #Enleve les collonnes longitudes et latitude
 data <- subset(data, select = -c(longitude, latitude))
