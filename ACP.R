@@ -1,3 +1,7 @@
+#install.packages("readr")
+library(readr)
+
+
 accident_data <- read.csv("prepared_data.csv", sep = ",")
 departement_data <- read.table("departement.txt", header = TRUE, fill = TRUE)
 region_data <- read_delim("regions.txt", delim = "\t", col_names = TRUE)
