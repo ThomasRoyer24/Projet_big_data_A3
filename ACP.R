@@ -44,8 +44,7 @@ for(i in 1:nrow(departement_data)){
   nb_acc_3 = 0
   nb_acc_4 = 0
   for(row in 1000:nrow(accident_data)){
-    print(row)
-    if(floor(accident_data[row,"id_code_insee"]/1000) == 1){
+    if(floor(accident_data[row,"id_code_insee"]/1000) == departement_data[i,"DEP"]){
       
       if(accident_data[row,"descr_grav"] == 1){
         nb_acc_1 = nb_acc_1+1
@@ -61,7 +60,8 @@ for(i in 1:nrow(departement_data)){
       }
     }
   }
-  Resultat_dep[nrow(Resultat_dep) + 1,]  <- c(departement_data[i,4],nb_acc_1,nb_acc_2,nb_acc_3,nb_acc_4)
+  Resultat_dep[nrow(Resultat_dep) + 1,]  <- c(departement_data[i,"NCC"],nb_acc_1,nb_acc_2,nb_acc_3,nb_acc_4)
 }
+
 
 
