@@ -1,14 +1,13 @@
 #install.packages("readr")
 library(readr)
 
-
 accident_data <- read.csv("prepared_data.csv", sep = ",")
 departement_data <- read.table("departement.txt", header = TRUE, fill = TRUE)
 region_data <- read_delim("regions.txt", delim = "\t", col_names = TRUE)
 demographie_data <- read_delim("Démographie.txt", delim = "\t", col_names = TRUE)
 
 Resultat_region <- data.frame()
-Resultat_region <- data.frame(region=character(), nb_acc_1=numeric(), nb_acc_2=numeric(), nb_acc_3=numeric(), nb_acc_4=numeric())
+Resultat_region <- data.frame(region=character(), Indemne=numeric(), Tué=numeric(), Blessé_hospitalisé=numeric(), Blessé_léger=numeric(),Total=numeric())
 
 for(i in 1:nrow(region_data)){
   region = region_data[i,"REGION"]
@@ -33,13 +32,14 @@ for(i in 1:nrow(region_data)){
       }
     }
   }
-  Resultat_region[nrow(Resultat_region) + 1,]  <- c(region_data[i,5],nb_acc_1,nb_acc_2,nb_acc_3,nb_acc_4)
+  total = nb_acc_1+nb_acc_2+nb_acc_3+nb_acc_4
+  Resultat_region[nrow(Resultat_region) + 1,]  <- c(region_data[i,5],nb_acc_1,nb_acc_2,nb_acc_3,nb_acc_4,total)
 }
 
 
 
 Resultat_dep <- data.frame()
-Resultat_dep <- data.frame(departement=character(), nb_acc_1=numeric(), nb_acc_2=numeric(), nb_acc_3=numeric(), nb_acc_4=numeric())
+Resultat_dep <- data.frame(region=character(), Indemne=numeric(), Tué=numeric(), Blessé_hospitalisé=numeric(), Blessé_léger=numeric(),Total=numeric())
 
 for(i in 1:nrow(departement_data)){
   departement = departement_data[i,"DEP"]
@@ -64,7 +64,8 @@ for(i in 1:nrow(departement_data)){
       }
     }
   }
-  Resultat_dep[nrow(Resultat_dep) + 1,]  <- c(departement_data[i,"NCC"],nb_acc_1,nb_acc_2,nb_acc_3,nb_acc_4)
+  total = nb_acc_1+nb_acc_2+nb_acc_3+nb_acc_4
+  Resultat_dep[nrow(Resultat_dep) + 1,]  <- c(departement_data[i,"NCC"],nb_acc_1,nb_acc_2,nb_acc_3,nb_acc_4,total)
 }
 
 
