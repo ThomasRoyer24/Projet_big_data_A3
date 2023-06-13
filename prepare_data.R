@@ -4,10 +4,14 @@ if(!require('readr')) {
 }
 
 library('readr')
-
+library('tidyverse')
 
 data <- read.csv("stat_acc_V3.csv", sep=";")
 
+data <- data %>%
+  mutate(id_code_insee = ifelse(substr(id_code_insee, 1, 2) == "2A", "98000", id_code_insee))
+data <- data %>%
+  mutate(id_code_insee = ifelse(substr(id_code_insee, 1, 2) == "2B", "99000", id_code_insee))
 
 #Mettre la date sous format date
 data$date <- as.POSIXct(data$date, tz="UTC")
@@ -69,6 +73,8 @@ data <- transform(data, an_nais = as.numeric(as.character(an_nais)), age = as.nu
 
 #supprimer les les NA des code insee
 data <- data[!is.na(data$id_code_insee), ]
+
+
 
 #Export prepared_data en csv propre
 write.csv(data, file = "prepared_data.csv", row.names = FALSE )
