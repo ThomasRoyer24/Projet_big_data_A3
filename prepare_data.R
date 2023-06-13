@@ -67,6 +67,9 @@ data <- data[!grepl("^97", data$id_code_insee), ]
 #Transforme les strings en int
 data <- transform(data, an_nais = as.numeric(as.character(an_nais)), age = as.numeric(as.character(age)), id_code_insee = as.numeric(as.character(id_code_insee)) ,place = as.numeric(as.character(place)))
 
+#supprimer les les NA des code insee
+data <- data[!is.na(data$id_code_insee), ]
+
 #Export prepared_data en csv propre
 write.csv(data, file = "prepared_data.csv", row.names = FALSE )
 
