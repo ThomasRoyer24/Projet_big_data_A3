@@ -14,3 +14,18 @@ for (i in seq(0, 120, by=10)){
 
 barplot(series_age, names.arg = age, main = "Nombre de mort par tranches d'âges")
 
+#Moyenne mensuelle des accidents 
+#Rependre variables et données du fichier series_chrono.R
+
+series_chrono_mois <- c(series_chrono_mois, mean(series_chrono_mois)) #environ 6037 accident par mois
+mois <- c(mois, "mean")
+
+barplot(xlab = "mois",
+        series_chrono_mois,
+        names.arg = mois,
+        ylab = "nbr accidents",
+        type = "b",
+        main = "Nombre accident par mois sur 2009",
+        col = c("gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray", "red"))
+
+        
