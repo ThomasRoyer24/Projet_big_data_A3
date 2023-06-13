@@ -1,0 +1,14 @@
+REGION	Population
+Auvergne-Rhône-Alpes	7 459 092
+Bourgogne- Franche-Comté	2 802 519
+Bretagne	3 149 701
+Centre - Val de Loire	2 531 588
+Corse	302 966
+Grand Est	5 521 452
+Hauts-de-France	5 931 091
+Île-de-France	11 659 260
+Normandie	3 293 092
+Nouvelle Aquitaine	5 671 076
+Occitanie	5 419 946
+Pays de la Loire	3 510 170
+Provence-Alpes-Côte d'Azur	4 882 913

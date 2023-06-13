@@ -1,0 +1,30 @@
+accident_data <- read.csv("prepared_data.csv", sep = ",")
+departement_data <- read.table("departement.txt", header = TRUE, fill = TRUE)
+region_data <- read_delim("regions.txt", delim = "\t", col_names = TRUE)
+demographie_data <- read_delim("Démographie.txt", delim = "\t", col_names = TRUE)
+
+for(i in 1:nrow(region_data)){
+  region = region_data[i,"NCCENR"]
+  nb_acc_1 = 0
+  nb_acc_2 = 0
+  nb_acc_3 = 0
+  nb_acc_4 = 0
+  for(row in 1:nrow(accident_data)){
+    if(floor(accident_data[row,"id_code_insee"]/1000) == departement_data[i,"DEP"]){
+      
+      if(accident_data[row,"descr_grav"] == 1){
+        nb_acc_1 = nb_acc_1+1
+      }
+      if(accident_data[row,"descr_grav"] == 2){
+        nb_acc_2 =nb_acc_2+1
+      }
+      if(accident_data[row,"descr_grav"] == 3){
+        nb_acc_3 =nb_acc_3+1
+      }
+      if(accident_data[row,"descr_grav"] == 4){
+        nb_acc_4=nb_acc_4+1
+      }
+    }
+  }
+}
+
