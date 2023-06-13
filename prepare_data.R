@@ -64,6 +64,6 @@ data <- subset(data, select = -c(longitude, latitude))
 data <- transform(data, an_nais = as.numeric(as.character(an_nais)), age = as.numeric(as.character(age)), place = as.numeric(as.character(place)))
 
 
-
+write.csv(data, "prepared_data.csv")
 
 
