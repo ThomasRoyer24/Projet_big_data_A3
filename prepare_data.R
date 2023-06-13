@@ -1,5 +1,5 @@
 
-if(!require('chron')) {
+if(!require('readr')) {
   install.packages('readr')
 }
 
@@ -63,8 +63,6 @@ for(row in 1:73643){
 #Supprime tous les DOM
 data <- data[!grepl("^97", data$id_code_insee), ]
 
-#Enleve les collonnes longitudes et latitude
-data <- subset(data, select = -c(longitude, latitude))
 
 #Transforme les strings en int
 data <- transform(data, an_nais = as.numeric(as.character(an_nais)), age = as.numeric(as.character(age)), id_code_insee = as.numeric(as.character(id_code_insee)) ,place = as.numeric(as.character(place)))
