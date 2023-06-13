@@ -1,12 +1,8 @@
-if(!require('chron')) {
-  install.packages('chron')
-}
 
 if(!require('chron')) {
   install.packages('readr')
 }
 
-library('chron')
 library('readr')
 
 
@@ -14,7 +10,7 @@ data <- read.csv("stat_acc_V3.csv", sep=";")
 
 
 #Mettre la date sous format date
-data <- transform(data, date = as.chron(date)) 
+data$date <- as.POSIXct(data$date, tz="UTC")
 
 
 #Type de véhicules
@@ -73,7 +69,7 @@ data <- subset(data, select = -c(longitude, latitude))
 #Transforme les strings en int
 data <- transform(data, an_nais = as.numeric(as.character(an_nais)), age = as.numeric(as.character(age)), place = as.numeric(as.character(place)))
 
-
-write.csv(data, "prepared_data.csv")
+#Export prepared_data en csv propre
+write.csv(data, file = "prepared_data.csv", row.names = FALSE )
 
 
