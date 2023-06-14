@@ -41,7 +41,7 @@ for(i in 1:nrow(region_data)){
 
 
 Resultat_dep <- data.frame()
-Resultat_dep <- data.frame(region=character(), Indemne=numeric(), Tué=numeric(), Blessé_hospitalisé=numeric(), Blessé_léger=numeric(),Total=numeric())
+Resultat_dep <- data.frame(region=character(), id_dep=numeric() ,Indemne=numeric(), Tué=numeric(), Blessé_hospitalisé=numeric(), Blessé_léger=numeric(),Total=numeric())
 
 for(i in 1:nrow(departement_data)){
   departement = departement_data[i,"DEP"]
@@ -67,7 +67,7 @@ for(i in 1:nrow(departement_data)){
     }
   }
   total = nb_acc_1+nb_acc_2+nb_acc_3+nb_acc_4
-  Resultat_dep[nrow(Resultat_dep) + 1,]  <- c(departement_data[i,"NCC"],nb_acc_1,nb_acc_2,nb_acc_3,nb_acc_4,total)
+  Resultat_dep[nrow(Resultat_dep) + 1,]  <- c(departement_data[i,"NCC"],departement,nb_acc_1,nb_acc_2,nb_acc_3,nb_acc_4,total)
 }
 
 
