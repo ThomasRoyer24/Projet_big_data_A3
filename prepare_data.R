@@ -1,6 +1,9 @@
-
 if(!require('readr')) {
   install.packages('readr')
+}
+
+if(!require('tidyverse')) {
+  install.packages('tidyverse')
 }
 
 library('readr')
@@ -60,7 +63,7 @@ data$descr_grav<- gsub("Blessé léger", 4, data$descr_grav)
 
 
 #Remplace NULL par piéton dans place
-for(row in 1:73643){
+for(row in 1:nrow(data)){
   if (data[row,"place"] == "NULL") {data[row,"place"] =10}
 }
 
@@ -74,6 +77,15 @@ data <- transform(data, an_nais = as.numeric(as.character(an_nais)), age = as.nu
 #supprimer les les NA des code insee
 data <- data[!is.na(data$id_code_insee), ]
 
+
+
+#Ajuste les ages en fonction de la date de naissance
+for(row in 1:nrow(data)){
+  data[row,"age"] <- (2009- as.numeric(data[row,"an_nais"]))
+}
+
+#supprimer les les NULL des années de naissance
+data <- data[!is.na(data$an_nais), ]
 
 
 #Export prepared_data en csv propre
