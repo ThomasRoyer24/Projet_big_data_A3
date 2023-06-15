@@ -13,6 +13,7 @@ library('dplyr')
 
 
 data <- read.csv("stat_acc_V3.csv", sep = ";")
+prep_data <- read.csv("prepared_data.csv", sep = ",")
 
 
 tab<-table(data$descr_lum,data$descr_grav)
@@ -126,7 +127,7 @@ mosaicplot(tab, shade = TRUE,)
 dev.off()
 
 
-sub<-data
+sub<-prep_data
 
 
 sub$age <- as.numeric(as.character(sub$age))
