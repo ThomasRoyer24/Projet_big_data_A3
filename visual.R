@@ -10,7 +10,8 @@ library('readr')
 library('chron')
 
 #Lis le fichier csv
-nom_dataframe <- read.csv("prepared_data.csv", sep = ",")
+base <- read.csv("prepared_data.csv", sep = ",")
+base <- transform(base, date = as.chron(date))
 
 #histogramme en fonction des conditions atmosphériques
 ggplot(base) +
@@ -61,11 +62,12 @@ matin=0
 midi=0
 soir=0
 
-for(i in 1:73643){
-  if (hours(data[i,4]) >= 23 || hours(data[i,4]) < 5 ) {nuit=nuit+1}
-  if (hours(data[i,4]) < 11 && hours(data[i,4]) >= 5 ) {matin=matin+1}
-  if (hours(data[i,4]) < 17 && hours(data[i,4]) >= 11 ) {midi=midi+1}
-  if (hours(data[i,4]) < 23 && hours(data[i,4]) >= 17 ) {soir=soir+1}
+
+for(i in 1:nrow(base)){
+  if (hours(base[i,4]) >= 23 || hours(base[i,4]) < 5 ) {nuit=nuit+1}
+  if (hours(base[i,4]) < 11 && hours(base[i,4]) >= 5 ) {matin=matin+1}
+  if (hours(base[i,4]) < 17 && hours(base[i,4]) >= 11 ) {midi=midi+1}
+  if (hours(base[i,4]) < 23 && hours(base[i,4]) >= 17 ) {soir=soir+1}
 }
 
 periode <- structure(c(matin,midi,soir,nuit))
@@ -79,14 +81,14 @@ dev.off()
 
 
 #Récupère les 20 villes ayant eu le plus d'accidents 
-freq<-table(data$ville[])
+freq<-table(base$ville[])
 head(freq, 20)
 
-vil<-tail(names(sort(table(data$ville))), 20)
+vil<-tail(names(sort(table(base$ville))), 20)
 
 dead <- c()
 for (i in 1:20){
-  dead <- append(dead, length(which(data$ville == vil[i])))
+  dead <- append(dead, length(which(base$ville == vil[i])))
 }
 
 #diagramme des 20 villes ayant eu le plus d'accident
