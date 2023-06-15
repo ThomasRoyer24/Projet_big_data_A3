@@ -94,7 +94,7 @@ for (i in 1:20){
 #diagramme des 20 villes ayant eu le plus d'accident
 barplot(rev(dead), names.arg=rev(vil), las=2)
 
-png("accident_ville.png", width = 800, height = 900)
+png("accident_ville.png", width = 1800, height = 900)
 par(mar=c(10,4,4,4)+.1)
 barplot(rev(dead), names.arg=rev(vil), las=2)
 dev.off()
