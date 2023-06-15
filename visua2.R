@@ -195,7 +195,7 @@ for (i in 1:length(adm_fr$CC_2)){
   }
 }
 
-plot(adm_fr, col=color_list_dep, main="carte département en fonction du nombre accidents")
+plot(adm_fr, col=color_list_dep, main="carte département en fonction du taux d'accidents graves")
 
 scalebar(d = 200, xy = c(-8,50), type = "bar", below = "km",lwd = 4, divs = 2, col = "black", cex = 0.75, lonlat = T)
 
@@ -252,7 +252,7 @@ for (i in 1:length(adm_fr$CC_1)){
   }
 }
 
-plot(adm_fr, col=color_list_dep, main="carte région en fonction du nombre accidents")
+plot(adm_fr, col=color_list_dep, main="carte région en fonction du taux d'accidents graves")
 scalebar(d = 200, xy = c(-8,50), type = "bar", below = "km",lwd = 4, divs = 2, col = "black", cex = 0.75, lonlat = T)
 
 
