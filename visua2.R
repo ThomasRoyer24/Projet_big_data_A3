@@ -1,26 +1,34 @@
-#install.packages('ggmap')
-#install.packages('ggplot2')
-#install.packages('plotly')
-library(plotly)
-library(ggplot2)
+#/!\ Lancer le fichier prepare_data.R et ACP.R avant ce fichier /!\
+
+if(!require('ggmap')) {
+  install.packages('ggmap')
+}
 library(ggmap)
 
+if(!require('maptools')) {
+  install.packages('maptools')
+}
+library(maptools)
 
-#Carte 2
+if(!require('rgdal')) {
+  install.packages('rgdal')
+}
+library(rgdal)
 
-#level 1 : installation packages
-#install.packages("maptools");install.packages("rgdal");install.packages("maps");install.packages("raster")
-library("maptools");library(rgdal);library(maps);library(raster)
+if(!require('maps')) {
+  install.packages('maps')
+}
+library(maps)
 
+if(!require('raster')) {
+  install.packages('raster')
+}
+library(raster)
 
 #CARTE DEPARTEMENT ------------------------------------------------------------------------------------------------------------->
 
-# Level 2 permet d'aller au niveau des départements
+# Level=2 permet d'obtenir carte détail des départements
 adm_fr <- getData('GADM', country='FRA', level=2)
-
-# Afficher les cartes dans une fenêtre
-#layout(matrix(1:1,1,1)) # pour afficher 2 cartes
-
 
 color_list_dep <- c()
 
@@ -76,13 +84,12 @@ for (i in 1:length(adm_fr$CC_2)){
 }
 
 plot(adm_fr, col=color_list_dep, main="carte département en fonction du nombre accidents")
-
 scalebar(d = 200, xy = c(-8,50), type = "bar", below = "km",lwd = 4, divs = 2, col = "black", cex = 0.75, lonlat = T)
 
 
 #CARTE REGION ------------------------------------------------------------------------------------------------------>
 
-# Level 1 permet d'aller au niveau des régions
+# Level=1 permet d'obtenir carte détail régions
 adm_fr <- getData('GADM', country='FRA', level=1)
 
 adm_fr$NAME_1
@@ -136,12 +143,8 @@ scalebar(d = 200, xy = c(-8,50), type = "bar", below = "km",lwd = 4, divs = 2, c
 
 #CARTE DEPARTEMENT TAUX ACCIDENT GRAVES ------------------------------------------------------------------------>
 
-# Level 2 permet d'aller au niveau des départements
+# Level=2 permet d'obtenir carte détail des départements
 adm_fr <- getData('GADM', country='FRA', level=2)
-
-# Afficher les cartes dans une fenêtre
-#layout(matrix(1:1,1,1)) # pour afficher 2 cartes
-
 
 color_list_dep <- c()
 
@@ -162,8 +165,6 @@ for (i in 1:length(adm_fr$CC_2)){
   }
   
   acc_tampo <- as.numeric(Resultat_dep$Tué[Resultat_dep$id_dep == as.numeric(adm_fr$CC_2[i])]) * 2 + as.numeric(Resultat_dep$Blessé_hospitalisé[Resultat_dep$id_dep == as.numeric(adm_fr$CC_2[i])])
-  
-  print(acc_tampo)
   
   if(acc_tampo == 0){
     color_list_dep[i] <- "#FFFFFF"
@@ -202,7 +203,7 @@ scalebar(d = 200, xy = c(-8,50), type = "bar", below = "km",lwd = 4, divs = 2, c
 
 #CARTE REGION TAUX ACCIDENT GRAVES ------------------------------------------------------------------------>
 
-# Level 1 permet d'aller au niveau des régions
+# Level=1 permet d'obtenir carte detail régions
 adm_fr <- getData('GADM', country='FRA', level=1)
 
 adm_fr$NAME_1
@@ -216,14 +217,10 @@ for (i in 1:length(adm_fr$CC_1)){
 
 acc_tampo <- 0
 
-#association couleur pour chaque departement en fct du nbr d'accident
+#association couleur pour chaque régions en fct du nbr d'accident
 for (i in 1:length(adm_fr$CC_1)){
   
   acc_tampo <- as.numeric(Resultat_region$Tué[Resultat_region$id_region == as.numeric(adm_fr$CC_1[i])])*2 + as.numeric(Resultat_region$Blessé_hospitalisé[Resultat_region$id_region == as.numeric(adm_fr$CC_1[i])])
-  
-  #acc_tampo <- as.numeric(acc_tampo)
-  
-  print(acc_tampo)
   
   if(acc_tampo < 500){
     color_list_dep[i] <- "#FFE0E0"
