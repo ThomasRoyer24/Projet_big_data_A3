@@ -12,13 +12,13 @@ library('readr')
 library('dplyr')
 
 
-data <- read.csv("stat_acc_V3.csv", sep=";")
+data <- read.csv("stat_acc_V3.csv", sep = ";")
 
 
 tab<-table(data$descr_lum,data$descr_grav)
 tab
 
-khi <- chisq.test(tab, simulate.p.value = TRUE)
+khi <- chisq.test(tab)
 
 khi
 names(khi)
@@ -64,7 +64,7 @@ khi <- chisq.test(tab)
 
 khi
 
-png("mosaic_surf2_grav.png", width = 800, height = 900)
+png("mosaic_veh_grav.png", width = 800, height = 900)
 mosaicplot(tab, shade = TRUE,las=2)
 dev.off()
 
@@ -82,7 +82,7 @@ khi <- chisq.test(tab)
 
 khi
 
-png("mosaic_veh_grav.png", width = 800, height = 900)
+png("mosaic_veh2_grav.png", width = 800, height = 900)
 mosaicplot(tab, shade = TRUE,las=2)
 dev.off()
 
